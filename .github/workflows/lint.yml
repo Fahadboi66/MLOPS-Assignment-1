@@ -18,4 +18,4 @@ jobs:
       - name: Install dependencies
         run: pip install flake8
       - name: Run flake8
-        run: flake8 app.py model.py
+        run: flake8 .

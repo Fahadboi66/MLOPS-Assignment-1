@@ -20,4 +20,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: fahadboi66/ml-flask-app:latest
+          tags: your-dockerhub-username/ml-flask-app:latest
