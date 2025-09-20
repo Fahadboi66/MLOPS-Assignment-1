@@ -1,14 +1,17 @@
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from flask import Flask, request, jsonify
+from model import train_and_predict
 
-iris = load_iris()
-X_train, X_test, y_train, y_test = train_test_split(
-    iris.data, iris.target, test_size=0.2, random_state=42
-)
+app = Flask(__name__)
 
-model = LogisticRegression(max_iter=200)
-model.fit(X_train, y_train)
+@app.route("/")
+def home():
+    return "ML Flask App Running!"
 
-def train_and_predict(sample):
-    return int(model.predict([sample])[0])
+@app.route("/predict", methods=["POST"])
+def predict():
+    data = request.json
+    result = train_and_predict(data["input"])
+    return jsonify({"prediction": result})
+
+if __name__ == "__main__":
+    app.run(debug=True)
